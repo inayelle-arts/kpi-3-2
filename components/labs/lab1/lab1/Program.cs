@@ -2,9 +2,9 @@
 
 namespace lab1
 {
-	class Program
+	internal static class Program
 	{
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
 			var controller = new Controller();
 
