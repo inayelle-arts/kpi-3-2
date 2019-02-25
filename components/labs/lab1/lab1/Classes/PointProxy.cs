@@ -8,6 +8,11 @@ namespace lab1.Classes
 
 		public PointProxy(Point instance)
 		{
+			if (instance is null)
+			{
+				throw new ArgumentNullException(nameof(instance));
+			}
+			
 			_instance = instance;
 		}
 

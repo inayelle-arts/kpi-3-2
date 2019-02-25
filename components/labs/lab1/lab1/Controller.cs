@@ -28,7 +28,10 @@ namespace lab1
 
 			var type = point.GetType();
 
-			foreach (var methodInfo in type.GetMethods().Where(m => m.GetCustomAttribute<InvokeAttribute>() != null))
+			var methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+			                  .Where(m => m.GetCustomAttribute<InvokeAttribute>() != null);
+			
+			foreach (var methodInfo in methods)
 			{
 				methodInfo.Invoke(point, new object[0]);
 			}
@@ -56,8 +59,8 @@ namespace lab1
 			foreach (var constructor in type.GetConstructors())
 			{
 				sb.Append(className)
-					.Append(GetCtorParameterString(constructor))
-					.Append(Environment.NewLine);
+				  .Append(GetCtorParameterString(constructor))
+				  .Append(Environment.NewLine);
 			}
 
 			return sb.ToString();

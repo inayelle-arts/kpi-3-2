@@ -26,6 +26,14 @@ namespace lab1.Classes
 			Console.WriteLine($"{nameof(Point)} movement.");
 		}
 
+		public double DistanceTo(Point another)
+		{
+			var part1 = Math.Pow(another.X - this.X, 2);
+			var part2 = Math.Pow(another.Y - this.Y, 2);
+
+			return Math.Sqrt(part1 + part2);
+		}
+
 		[Invoke]
 		public void InvokeMe()
 		{

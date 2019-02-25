@@ -10,7 +10,7 @@ namespace lab1.Classes
 
 		public Ellipse(int x, int y, double verticalAxis, double horizontalAxis) : base(x, y)
 		{
-			VerticalAxis = verticalAxis;
+			VerticalAxis   = verticalAxis;
 			HorizontalAxis = horizontalAxis;
 		}
 
