@@ -1,5 +1,5 @@
 using System;
-using lab1.Classes;
+using Lab1.Classes;
 using Xunit;
 
 namespace tests

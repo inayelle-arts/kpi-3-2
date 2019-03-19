@@ -1,6 +1,6 @@
 using System;
 
-namespace lab1.Classes
+namespace Lab1.Classes
 {
 	public class PointProxy
 	{
@@ -8,12 +8,7 @@ namespace lab1.Classes
 
 		public PointProxy(Point instance)
 		{
-			if (instance is null)
-			{
-				throw new ArgumentNullException(nameof(instance));
-			}
-			
-			_instance = instance;
+			_instance = instance ?? throw new ArgumentNullException(nameof(instance));
 		}
 
 		public int X

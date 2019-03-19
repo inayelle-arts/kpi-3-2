@@ -1,12 +1,13 @@
 ﻿using System;
+using Lab1.Classes;
 
-namespace lab1
+namespace Lab1
 {
 	internal static class Program
 	{
 		private static void Main(string[] args)
 		{
-			var controller = new Controller();
+			var controller = new Controller(new Instantiator(), new View());
 
 			Console.ForegroundColor = ConsoleColor.Red;
 			controller.ShowContructors();
@@ -18,7 +19,14 @@ namespace lab1
 			controller.CallMethodsWithInvokeAttribute();
 			
 			Console.ForegroundColor = ConsoleColor.Blue;
-			controller.CallProxy();
+			try
+			{
+				controller.CallProxy();
+			}
+			catch (InvalidOperationException exception)
+			{
+				Console.WriteLine(exception.Message);
+			}
 		}
 	}
 }

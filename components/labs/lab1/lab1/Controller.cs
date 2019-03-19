@@ -2,35 +2,45 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using lab1.Attributes;
-using lab1.Classes;
-using lab1.Extensions;
+using Lab1.Extensions;
+using Lab1.Attributes;
+using Lab1.Classes;
 
-namespace lab1
+namespace Lab1
 {
 	public class Controller
 	{
+		private readonly Instantiator _instantiator;
+
+		private readonly IView _view;
+
+		public Controller(Instantiator instantiator, IView view)
+		{
+			_instantiator = instantiator;
+			_view         = view;
+		}
+
 		public void ShowContructors()
 		{
-			Console.Write(GetCtorsInfoString(typeof(Point)));
-			Console.Write(GetCtorsInfoString(typeof(Ellipse)));
+			_view.WriteLine(GetCtorsInfoString(typeof(Point)));
+			_view.WriteLine(GetCtorsInfoString(typeof(Ellipse)));
 		}
 
 		public void ShowModifiers()
 		{
-			Console.WriteLine(typeof(Point).GetModifiersString());
-			Console.WriteLine(typeof(Ellipse).GetModifiersString());
+			_view.WriteLine(typeof(Point).GetModifiersString());
+			_view.WriteLine(typeof(Ellipse).GetModifiersString());
 		}
 
 		public void CallMethodsWithInvokeAttribute()
 		{
-			var point = new Point(10, 5);
+			var point = _instantiator.CreatePoint();
 
 			var type = point.GetType();
 
 			var methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
 			                  .Where(m => m.GetCustomAttribute<InvokeAttribute>() != null);
-			
+
 			foreach (var methodInfo in methods)
 			{
 				methodInfo.Invoke(point, new object[0]);
@@ -39,15 +49,9 @@ namespace lab1
 
 		public void CallProxy()
 		{
-			try
-			{
-				var pointProxy = new PointProxy(new Point());
-				pointProxy.X = 322;
-			}
-			catch (InvalidOperationException exception)
-			{
-				Console.WriteLine(exception.Message);
-			}
+			_view.WriteLine("Calling proxy setter...");
+			var pointProxy = _instantiator.CreateProxy();
+			pointProxy.X = 322;
 		}
 
 		private static string GetCtorsInfoString(Type type)

@@ -1,7 +1,7 @@
 using System;
-using lab1.Attributes;
+using Lab1.Attributes;
 
-namespace lab1.Classes
+namespace Lab1.Classes
 {
 	public class Point
 	{
@@ -35,9 +35,15 @@ namespace lab1.Classes
 		}
 
 		[Invoke]
-		public void InvokeMe()
+		public virtual void InvokeMe()
 		{
-			Console.WriteLine($"Method call with {nameof(InvokeAttribute)} attribute");
+			Console.WriteLine($"Method [{nameof(InvokeMe)}] call with {nameof(InvokeAttribute)} attribute");
+		}
+
+		[Invoke]
+		public virtual void InvokeMeTo()
+		{
+			Console.WriteLine($"Method [{nameof(InvokeMeTo)}] call with {nameof(InvokeAttribute)} attribute");
 		}
 	}
 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace lab1.Extensions
+namespace Lab1.Extensions
 {
 	public static class TypeExtensions
 	{

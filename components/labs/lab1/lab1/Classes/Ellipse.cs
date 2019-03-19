@@ -1,6 +1,6 @@
 using System;
 
-namespace lab1.Classes
+namespace Lab1.Classes
 {
 	public class Ellipse : Point
 	{
